@@ -6,6 +6,7 @@ app.use(morgan("common"));
 
 app.use(express.static("public"));
 
+
 // Movies Databank
 let movies = [
   {
