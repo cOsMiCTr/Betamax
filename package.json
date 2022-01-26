@@ -1,7 +1,6 @@
 {
-  "name": "movie_api",
+  "name": "betamax",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,17 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cOsMiCTr/movie_api.git"
+    "url": "git+https://github.com/cOsMiCTr/betamax.git"
   },
   "keywords": [],
   "author": "Onur Baki",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cOsMiCTr/movie_api/issues"
+    "url": "https://github.com/cOsMiCTr/betamax/issues"
   },
-  "homepage": "https://github.com/cOsMiCTr/movie_api#readme",
+  "homepage": "https://github.com/cOsMiCTr/betamax#readme",
   "dependencies": {
-    "body-parser": "^1.19.1",
     "express": "^4.17.2",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
@@ -30,5 +28,6 @@
   "devDependencies": {
     "eslint": "^8.7.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "description": ""
 }
