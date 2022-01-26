@@ -1,0 +1,25 @@
+
+
+:root {
+    --body-font-size: 12pt;
+
+}
+
+body {
+    font-family: 'futura';
+    font-size: 11pt;
+    padding: 2rem;
+    text-align: -webkit-center;
+}
+
+.accordion {
+    margin: 2rem;
+}
+
+.card-header {
+    margin-top: 1rem;
+}
+
+.card-header:first-child {
+    border-radius: 10px;
+}
