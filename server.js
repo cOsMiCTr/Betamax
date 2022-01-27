@@ -1,3 +1,5 @@
+const { indexOf, xorWith } = require("lodash");
+
 const express = require("express"),
   morgan = require("morgan"),
   app = express(),
@@ -22,7 +24,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "14.07.2008",
-    Genre: { Name: ["Action", "Drama"] },
+    Genre: ["Action", "Drama"],
     imageURL: "https://m.media-amazon.com/images/I/91KkWf50SoL._SL1500_.jpg",
   },
   {
@@ -37,7 +39,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "01.12.2003",
-    Genre: { Name: "Fantasy" },
+    Genre: ["Fantasy"],
     imageURL: "https://m.media-amazon.com/images/I/81kUINEtUbL._SL1408_.jpg",
   },
   {
@@ -52,7 +54,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "01.07.2010",
-    Genre: { Name: "Action" },
+    Genre: ["Action"],
     imageURL: "https://m.media-amazon.com/images/I/71SBgi0X2KL._SL1200_.jpg",
   },
   {
@@ -67,7 +69,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "17.06.1999",
-    Genre: { Name: "Action" },
+    Genre: ["Action"],
     imageURL: "https://m.media-amazon.com/images/I/71D8+NFLZmL._SL1500_.jpg",
   },
   {
@@ -82,7 +84,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "03.10.1985",
-    Genre: { Name: "Action" },
+    Genre: ["Action"],
     imageURL: "https://m.media-amazon.com/images/I/51th2-bmq-L.jpg",
   },
   {
@@ -97,7 +99,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "08.10.1998",
-    Genre: { Name: "Drama" },
+    Genre: ["Drama"],
     imageURL: "https://m.media-amazon.com/images/I/417Tz4B7YIL.jpg",
   },
   {
@@ -112,7 +114,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "09.03.1995",
-    Genre: { Name: "Drama" },
+    Genre: ["Drama"],
     imageURL: "https://m.media-amazon.com/images/I/51wdGaBba1L._AC_.jpg",
   },
   {
@@ -127,7 +129,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "23.10.2003",
-    Genre: { Name: "Horror" },
+    Genre: ["Horror"],
     imageURL: "https://m.media-amazon.com/images/I/91jUuRKZlvL._SL1500_.jpg",
   },
   {
@@ -142,7 +144,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "24.04.2019",
-    Genre: { Name: ["Superhero", "Action"] },
+    Genre: ["Superhero", "Action"],
     imageURL: "https://m.media-amazon.com/images/I/71s4OWUH2oL._SL1200_.jpg",
   },
   {
@@ -157,7 +159,7 @@ let movies = [
       deathYear: "",
     },
     releaseDate: "21.11.1976",
-    Genre: { Name: "Drama" },
+    Genre: ["Drama"],
     imageURL: "https://m.media-amazon.com/images/I/51AP5MY2B5L.jpg",
   },
 ];
@@ -165,17 +167,17 @@ let movies = [
 let users = [
   {
     id: 1,
-    name: "John",
+    username: "John",
     favoriteMovies: [],
   },
   {
     id: 2,
-    name: "Carla",
+    username: "Carla",
     favoriteMovies: [],
   },
   {
     id: 3,
-    name: "Henry",
+    username: "Henry",
     favoriteMovies: [],
   },
 ];
@@ -209,12 +211,15 @@ app.get("/movies/:title", (req, res) => {
 });
 
 // Search by Genre
-app.get("/movies/genre/:genreName", (req, res) => {
-  const { genreName } = req.params;
-  const genre = movies.filter((movie) => movie.Genre.Name === genreName);
+app.get("/movies/genre/:genre", (req, res) => {
+  const { genre } = req.params;
+  const genres = movies.filter((movie) => {
+    let arrayOfGenres = movie.Genre;
+    return arrayOfGenres.some((element) => element === genre);
+  });
 
-  if (genre) {
-    return res.status(200).json(genre);
+  if (genres) {
+    return res.status(200).json(genres);
   } else {
     res.status(400).send("Can't find a movie with that genre!");
   }
@@ -251,13 +256,18 @@ app.get("/movies/directors/info/:directorName", (req, res) => {
 // returns the image link of the searched movie
 app.get("/movies/:title/image/", (req, res) => {
   const { title } = req.params,
-        image = movies.find((movie) => movie.title === title).imageURL;
+    image = movies.find((movie) => movie.title === title).imageURL;
 
   if (image) {
     return res.status(200).json(image);
   } else {
     res.status(400).send("Can't find a director with that name!");
   }
+});
+
+// List all Users
+app.get("/users/all", (req, res) => {
+  res.status(200).json(users);
 });
 
 // Add User
@@ -274,19 +284,120 @@ app.post("/users", (req, res) => {
   }
 });
 
-
 // Update User
 app.put("/users/:id", (req, res) => {
-  const  { id } = req.params;
-  const  updatedUser = req.body;
+  const { id } = req.params;
+  const updatedUser = req.body;
 
-  let user = users.find( user => user.id == id );
+  let user = users.find((user) => user.id == id);
 
   if (user) {
-    user.name = updatedUser.name;
+    user.username = updatedUser.username;
     res.status(200).json(user);
   } else {
     res.status(400).send("No such user!");
+  }
+});
+
+// Delete User
+app.delete("/users/:id", (req, res) => {
+  const { id } = req.params;
+  const updatedUser = req.body;
+
+  let user = users.find((user) => user.id == id);
+  let userName = user.username;
+  if (user) {
+    users = users.filter((user) => user.id != id);
+    res
+      .status(200)
+      .json("Username " + userName + " has been successfully deleted!");
+  } else {
+    res.status(400).send("No such user!");
+  }
+});
+
+// Create favorite movie
+app.post("/users/:id/:movieTitle", (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find((user) => user.id == id);
+
+  // Movie control
+  let movieToSearch = movies.find((movie) => movie.title == movieTitle);
+
+  // Multiple entry control under the user
+  let existingMovie = user.favoriteMovies.some(
+    (element) => element === movieToSearch.title
+  );
+
+  if (user) {
+    if (movieToSearch) {
+      if (!existingMovie) {
+        user.favoriteMovies.push(movieToSearch.title);
+        res
+          .status(200)
+          .json(
+            "The movie " +
+              movieToSearch.title +
+              " has been added to the user " +
+              user.username
+          );
+      } else {
+        res
+          .status(400)
+          .send(
+            "The movie " +
+              movieToSearch.title +
+              " alredy exists in to the favorites list of this user " +
+              user.username
+          );
+      }
+    } else {
+      res.status(400).send("Can't find any movie with that title!");
+    }
+  } else {
+    res.status(400).send("There is no such user!");
+  }
+});
+
+// remove favorite movie from the user
+app.delete("/users/:id/:movieTitle", (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find((user) => user.id == id);
+
+  // Movie control
+  let movieToSearch = movies.find((movie) => movie.title == movieTitle);
+
+  // Existing movie control
+  let existingMovie = user.favoriteMovies.some(
+    (element) => element === movieToSearch.title
+  );
+
+  if (user) {
+    if (movieToSearch) {
+      if (existingMovie) {
+        user.favoriteMovies = user.favoriteMovies.filter(
+          (title) => title !== movieToSearch.title
+        );
+        res
+          .status(200)
+          .json(
+            "The movie " +
+              movieToSearch.title +
+              " has been removed from the user " +
+              user.name
+          );
+      } else {
+        res
+          .status(400)
+          .send("There is no such movie under the favorites list of this user");
+      }
+    } else {
+      res.status(400).send("Can't find a movie with that title!");
+    }
+  } else {
+    res.status(400).send("There is no such user!");
   }
 });
 
