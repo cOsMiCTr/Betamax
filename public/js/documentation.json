@@ -1,0 +1,155 @@
+
+  [
+    {
+      "name": "Entry page",
+      "method": "GET",
+      "query": "/",
+      "description": "Welcome page!",
+      "usedArray": ["movies"],
+      "example": "http://localhost:8080/",
+      "status": [{ "code": "200", "response": "" }]
+    },
+    {
+      "name": "Get ALL Movies",
+      "method": "GET",
+      "query": "/movies",
+      "description": "Lists all the movies in the databes",
+      "usedArray": "movies",
+      "example": "http://localhost:8080/movies",
+      "status": [{ "code": "200", "response": "" }]
+    },
+    {
+      "name": "Get Movies by title",
+      "method": "GET",
+      "query": "/movies/:title",
+      "description": "You can see all the movies in the database",
+      "usedArray": "movies",
+      "example": "http://localhost:8080/movies/Inception",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    },
+    {
+      "name": "Filter Movies with Genre",
+      "method": "GET",
+      "query": "/movies/genre/:genre",
+      "description": "Lists all the movies according to the given genre",
+      "usedArray": ["movies"],
+      "example": "http://localhost:8080/movies/genre/Action",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    },
+    {
+      "name": "Filter Movies with Director",
+      "method": "GET",
+      "query": "/movies/directors/:directorname",
+      "description": "You can filter the movies which are directed ny the looked up director",
+      "usedArray": ["movies"],
+      "example": "http://localhost:8080/movies/directors/Christopher%20Nolan",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    },
+    {
+      "name": "Director info by name",
+      "method": "GET",
+      "query": "/movies/directors/info/:director name",
+      "description": "Fetches the personal information about the director",
+      "usedArray": ["movies"],
+      "example": "http://localhost:8080/movies/directors/info/Christopher%20Nolan",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    },
+    {
+      "name": "Image link by title",
+      "method": "GET",
+      "query": "/movies/:title/image/",
+      "description": "Retrieves the image link of the movie",
+      "usedArray": ["movies"],
+      "example": "http://localhost:8080/movies/Inception/image/",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    },
+    {
+      "name": "List all users",
+      "method": "GET",
+      "query": "/users/all",
+      "description": "Returns the list of users at the databank",
+      "usedArray": ["users"],
+      "example": "http://localhost:8080/users/all",
+      "status": [{ "code": "200", "response": "" }]
+    },
+    {
+      "name": "Add new user",
+      "method": "POST",
+      "query": "/users",
+      "description": "Adds a new user with a new UUID (v4) to the databank",
+      "usedArray": ["users"],
+      "example": "http://localhost:8080/users",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    },
+    {
+      "name": "Update new user",
+      "method": "PUT",
+      "query": "/users/:id",
+      "description": "Updates the user with the given id",
+      "usedArray": ["users"],
+      "example": "http://localhost:8080/users/1",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    },
+    {
+      "name": "Delete an existing user",
+      "method": "DELETE",
+      "query": "/users/:id",
+      "description": "Delete an existing user with the given id",
+      "usedArray": ["users"],
+      "example": "http://localhost:8080/users/1",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    },
+    {
+      "name": "Add FavMovie to user",
+      "method": "POST",
+      "query": "/users/:id/:movieTitle",
+      "description": "Add a movie from the given movie title to the users favorite movies list with the given user id",
+      "usedArray": ["movies", "users"],
+      "example": "http://localhost:8080/users/1/Inception",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" },
+        { "code": "400", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    },
+    {
+      "name": "Delete FavMovie from user",
+      "method": "DELETE",
+      "query": "/users/:id/:movieTitle",
+      "description": "Delete the movie from the users favorite movie list from the given movie title with the given user id",
+      "usedArray": ["users"],
+      "example": "http://localhost:8080/users/1/Inception",
+      "status": [
+        { "code": "200", "response": "" },
+        { "code": "400", "response": "" },
+        { "code": "400", "response": "" },
+        { "code": "400", "response": "" }
+      ]
+    }
+  ]
+

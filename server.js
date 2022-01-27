@@ -198,7 +198,7 @@ app.get("/movies", (req, res) => {
   res.status(200).json(movies);
 });
 
-// Search by Title
+// "Get Movies by title"
 app.get("/movies/:title", (req, res) => {
   const { title } = req.params;
   const movie = movies.find((movie) => movie.title === title);
@@ -210,7 +210,7 @@ app.get("/movies/:title", (req, res) => {
   }
 });
 
-// Search by Genre
+// Filter Movies with Genre
 app.get("/movies/genre/:genre", (req, res) => {
   const { genre } = req.params;
   const genres = movies.filter((movie) => {
@@ -225,7 +225,7 @@ app.get("/movies/genre/:genre", (req, res) => {
   }
 });
 
-// Get the movies of the searched director
+// Filter Movies with Director
 app.get("/movies/directors/:directorName", (req, res) => {
   const { directorName } = req.params;
   const director = movies.filter(
@@ -239,7 +239,7 @@ app.get("/movies/directors/:directorName", (req, res) => {
   }
 });
 
-// Information about the searched director
+// Director info by name
 app.get("/movies/directors/info/:directorName", (req, res) => {
   const { directorName } = req.params;
   const director = movies.find(
@@ -270,7 +270,7 @@ app.get("/users/all", (req, res) => {
   res.status(200).json(users);
 });
 
-// Add User
+// Add new user
 app.post("/users", (req, res) => {
   let newUser = req.body;
 
@@ -284,7 +284,7 @@ app.post("/users", (req, res) => {
   }
 });
 
-// Update User
+// Update new user
 app.put("/users/:id", (req, res) => {
   const { id } = req.params;
   const updatedUser = req.body;
@@ -299,7 +299,7 @@ app.put("/users/:id", (req, res) => {
   }
 });
 
-// Delete User
+// Delete an existing user
 app.delete("/users/:id", (req, res) => {
   const { id } = req.params;
   const updatedUser = req.body;
@@ -316,7 +316,7 @@ app.delete("/users/:id", (req, res) => {
   }
 });
 
-// Create favorite movie
+// Add FavMovie to user
 app.post("/users/:id/:movieTitle", (req, res) => {
   const { id, movieTitle } = req.params;
 
@@ -360,7 +360,7 @@ app.post("/users/:id/:movieTitle", (req, res) => {
   }
 });
 
-// remove favorite movie from the user
+// Delete FavMovie from user
 app.delete("/users/:id/:movieTitle", (req, res) => {
   const { id, movieTitle } = req.params;
 

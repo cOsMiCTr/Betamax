@@ -23,3 +23,16 @@ body {
 .card-header:first-child {
     border-radius: 10px;
 }
+
+.nameText {
+    margin-top: 1rem;
+}
+
+.badge {
+    margin-right: 1rem;
+}
+
+h6 {
+    color: black;
+}
+
