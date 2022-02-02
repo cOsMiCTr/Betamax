@@ -5,15 +5,12 @@ const pokemonRepository = (() => {
 
 
   let loadList = () => {
-    return fetch("/public/js/documentation.json")
+    return fetch("/js/documentation.json")
       .then( (response) => { return response.json();})
       .then((data) => { 
       
         for (let i = 0; i < data.length; i++){
 
-
-            
-      
             const objectListContainer = document.querySelector(".accordion");
             let container = document.createElement("div"),
             containerSub1 = document.createElement("div"),
@@ -45,7 +42,7 @@ const pokemonRepository = (() => {
             clickContainer.classList.add("mb-0");
             clickContainer.classList.add("py-1");
             clickContainer.classList.add("collapsed");
-            
+
             containerHeader.classList.add("mb-0");
             containerHeader.classList.add("white-text");
             containerHeader.classList.add("font-weight-bold");
@@ -61,8 +58,6 @@ const pokemonRepository = (() => {
             } else if (data[i].method === "DELETE") {
               badge = "badge-danger";
             }
-
-
 
             badgeContainer.classList.add(badge);
             badgeContainer.innerText = data[i].method + " " ;
