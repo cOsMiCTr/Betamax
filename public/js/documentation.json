@@ -16,7 +16,10 @@
       "description": "Lists all the movies in the databes",
       "usedArray": "movies",
       "example": "http://localhost:8080/movies",
-      "status": [{ "code": "200", "response": "" }]
+      "status": [
+        { "code": "201", "response": "json" },
+        { "code": "500", "response": "Internal Server Error" }
+      ]
     },
     {
       "name": "Get Movies by title",
@@ -26,20 +29,19 @@
       "usedArray": "movies",
       "example": "http://localhost:8080/movies/Inception",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "400", "response": "Can't find a movie with that Title!" }
       ]
     },
     {
-      "name": "Filter Movies with Genre",
+      "name": "Filter Movies with a specific Genre",
       "method": "GET",
       "query": "/movies/genre/:genre",
       "description": "Lists all the movies according to the given genre",
       "usedArray": ["movies"],
       "example": "http://localhost:8080/movies/genre/Action",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "201", "response": "json" },
+        { "code": "400", "response": "Can't find a movie with that genre!" }
       ]
     },
     {
@@ -50,8 +52,8 @@
       "usedArray": ["movies"],
       "example": "http://localhost:8080/movies/directors/Christopher%20Nolan",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "200", "response": "json" },
+        { "code": "400", "response": "Can't find a director with that name!" }
       ]
     },
     {
@@ -62,8 +64,8 @@
       "usedArray": ["movies"],
       "example": "http://localhost:8080/movies/directors/info/Christopher%20Nolan",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "200", "response": "json" },
+        { "code": "400", "response": "Can't find a director with that name!" }
       ]
     },
     {
@@ -74,8 +76,8 @@
       "usedArray": ["movies"],
       "example": "http://localhost:8080/movies/Inception/image/",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "201", "response": "json" },
+        { "code": "400", "response": "Can't find a movie with that title!" }
       ]
     },
     {
@@ -85,7 +87,21 @@
       "description": "Returns the list of users at the databank",
       "usedArray": ["users"],
       "example": "http://localhost:8080/users/all",
-      "status": [{ "code": "200", "response": "" }]
+      "status": [
+        { "code": "201", "response": "json of all users" },
+        { "code": "500", "response": "Internal Server Error" }
+      ]
+    },
+    {
+      "name": "User by Username",
+      "method": "GET",
+      "query": "/users/:Username",
+      "description": "Returns the user from the given Username from the databank",
+      "usedArray": ["users"],
+      "example": "http://localhost:8080/users/Test",
+      "status": [
+        { "code": "500", "response": "Internal Server Error" }
+      ]
     },
     {
       "name": "Add new user",
@@ -95,8 +111,8 @@
       "usedArray": ["users"],
       "example": "http://localhost:8080/users",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "201", "response": "req.body.Username + \" already exists\"" },
+        { "code": "500", "response": "Internal Server Error" }
       ]
     },
     {
@@ -107,8 +123,7 @@
       "usedArray": ["users"],
       "example": "http://localhost:8080/users/1",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "500", "response": "Internal Server Error" }
       ]
     },
     {
@@ -119,8 +134,7 @@
       "usedArray": ["users"],
       "example": "http://localhost:8080/users/1",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "500", "response": "Internal Server Error" }
       ]
     },
     {
@@ -131,10 +145,9 @@
       "usedArray": ["movies", "users"],
       "example": "http://localhost:8080/users/1/Inception",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" },
-        { "code": "400", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "200", "response": "req.params.Username + ' was deleted.'" },
+        { "code": "400", "response": "req.params.Username + ' was not found'" }
+        { "code": "500", "response": "Internal Server Error" }
       ]
     },
     {
@@ -145,10 +158,7 @@
       "usedArray": ["users"],
       "example": "http://localhost:8080/users/1/Inception",
       "status": [
-        { "code": "200", "response": "" },
-        { "code": "400", "response": "" },
-        { "code": "400", "response": "" },
-        { "code": "400", "response": "" }
+        { "code": "500", "response": "Internal Server Error" }
       ]
     }
   ]
