@@ -5,6 +5,7 @@
       "method": "GET",
       "query": "/",
       "description": "Welcome page!",
+      "required": "nothing",
       "usedArray": ["movies"],
       "example": "http://localhost:8080/",
       "status": [{ "code": "200", "response": "" }]
@@ -14,6 +15,7 @@
       "method": "GET",
       "query": "/movies",
       "description": "Lists all the movies in the databes",
+      "required": "nothing",
       "usedArray": "movies",
       "example": "http://localhost:8080/movies",
       "status": [
@@ -26,6 +28,7 @@
       "method": "GET",
       "query": "/movies/:title",
       "description": "You can see all the movies in the database",
+      "required": "Title of the movie. e.g. Inception",
       "usedArray": "movies",
       "example": "http://localhost:8080/movies/Inception",
       "status": [
@@ -37,6 +40,7 @@
       "method": "GET",
       "query": "/movies/genre/:genre",
       "description": "Lists all the movies according to the given genre",
+      "required": "a valid Genre. e.g. Action",
       "usedArray": ["movies"],
       "example": "http://localhost:8080/movies/genre/Action",
       "status": [
@@ -49,6 +53,7 @@
       "method": "GET",
       "query": "/movies/directors/:directorname",
       "description": "You can filter the movies which are directed ny the looked up director",
+      "required": "a valid name of a Director. e.g. Christopher Nolan",
       "usedArray": ["movies"],
       "example": "http://localhost:8080/movies/directors/Christopher%20Nolan",
       "status": [
@@ -61,6 +66,7 @@
       "method": "GET",
       "query": "/movies/directors/info/:director name",
       "description": "Fetches the personal information about the director",
+      "required": "a valid name of a Director. e.g. Christopher Nolan",
       "usedArray": ["movies"],
       "example": "http://localhost:8080/movies/directors/info/Christopher%20Nolan",
       "status": [
@@ -73,6 +79,7 @@
       "method": "GET",
       "query": "/movies/:title/image/",
       "description": "Retrieves the image link of the movie",
+      "required": "Title of the movie. e.g. Inception",
       "usedArray": ["movies"],
       "example": "http://localhost:8080/movies/Inception/image/",
       "status": [
@@ -85,6 +92,7 @@
       "method": "GET",
       "query": "/users/all",
       "description": "Returns the list of users at the databank",
+      "required": "Title of the movie. e.g. Inception",
       "usedArray": ["users"],
       "example": "http://localhost:8080/users/all",
       "status": [
@@ -97,6 +105,7 @@
       "method": "GET",
       "query": "/users/:Username",
       "description": "Returns the user from the given Username from the databank",
+      "required": "Username of a user. e.g. Test",
       "usedArray": ["users"],
       "example": "http://localhost:8080/users/Test",
       "status": [
@@ -108,6 +117,7 @@
       "method": "POST",
       "query": "/users",
       "description": "Adds a new user with a new UUID (v4) to the databank",
+      "required": "nothing",
       "usedArray": ["users"],
       "example": "http://localhost:8080/users",
       "status": [
@@ -118,10 +128,11 @@
     {
       "name": "Update new user",
       "method": "PUT",
-      "query": "/users/:id",
-      "description": "Updates the user with the given id",
+      "query": "/users/:Username",
+      "description": "Updates the user with the given Username",
+      "required": "Username of a user. e.g. Test",
       "usedArray": ["users"],
-      "example": "http://localhost:8080/users/1",
+      "example": "http://localhost:8080/users/Test",
       "status": [
         { "code": "500", "response": "Internal Server Error" }
       ]
@@ -129,10 +140,11 @@
     {
       "name": "Delete an existing user",
       "method": "DELETE",
-      "query": "/users/:id",
-      "description": "Delete an existing user with the given id",
+      "query": "/users/:Username",
+      "description": "Delete an existing user with the given Username",
+      "required": "Username of a user. e.g. Test",
       "usedArray": ["users"],
-      "example": "http://localhost:8080/users/1",
+      "example": "http://localhost:8080/users/Test",
       "status": [
         { "code": "500", "response": "Internal Server Error" }
       ]
@@ -140,21 +152,23 @@
     {
       "name": "Add FavMovie to user",
       "method": "POST",
-      "query": "/users/:id/:movieTitle",
-      "description": "Add a movie from the given movie title to the users favorite movies list with the given user id",
+      "query": "/users/:Username/:movieTitle",
+      "description": "Add a movie from the given movie title to the users favorite movies list with the given Username",
+      "required": "Username and a movie title. e.g. Test/Inception",
       "usedArray": ["movies", "users"],
-      "example": "http://localhost:8080/users/1/Inception",
+      "example": "http://localhost:8080/users/Test/Inception",
       "status": [
         { "code": "200", "response": "req.params.Username + ' was deleted.'" },
-        { "code": "400", "response": "req.params.Username + ' was not found'" }
+        { "code": "400", "response": "req.params.Username + ' was not found'" },
         { "code": "500", "response": "Internal Server Error" }
       ]
     },
     {
       "name": "Delete FavMovie from user",
       "method": "DELETE",
-      "query": "/users/:id/:movieTitle",
-      "description": "Delete the movie from the users favorite movie list from the given movie title with the given user id",
+      "query": "/users/:Username/:movieTitle",
+      "description": "Delete the movie from the users favorite movie list from the given movie title with the given Username",
+      "required": "Username and a movie title. e.g. Test/Inception",
       "usedArray": ["users"],
       "example": "http://localhost:8080/users/1/Inception",
       "status": [

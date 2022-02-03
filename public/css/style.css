@@ -32,7 +32,34 @@ body {
     margin-right: 1rem;
 }
 
+h5 {
+    margin-bottom: 1rem;
+}
+
 h6 {
     color: black;
 }
 
+.col {
+    border-left: black;
+    border-style: solid;
+    border-width: thin;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-weight: bold;
+    background-color: rgba(150, 150, 150, 0.295);
+}
+
+.text {
+    margin-top: 1rem;
+    text-align: left;
+    word-wrap: break-word;
+    font-weight: 100;
+    color: rgb(70, 70, 70);
+}
+
+.card-body {
+    background-color: rgba(150, 150, 150, 0.158);
+    margin-top: 1rem;
+    border-radius: 10px;
+}

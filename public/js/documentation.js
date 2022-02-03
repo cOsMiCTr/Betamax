@@ -22,6 +22,14 @@ const pokemonRepository = (() => {
             containerSub2 = document.createElement("div"),
             cardContainer = document.createElement("div"),
             descriptionContainer = document.createElement("h5"),
+            documentationContainer = document.createElement("div"),
+            documentationRow = document.createElement("div"),
+            documentationRequired = document.createElement("div"),
+            requiredText = document.createElement("div"),
+            documentationExample = document.createElement("div"),
+            exampleText = document.createElement("div"),
+            documentationResponse = document.createElement("div"),
+            responseText = document.createElement("div"),
             badge = "";
 
             container.classList.add("accordion-item");
@@ -49,6 +57,15 @@ const pokemonRepository = (() => {
 
             badgeContainer.classList.add("badge");
 
+            documentationContainer.classList.add("container");
+            documentationRow.classList.add("row");
+            documentationRequired.classList.add("col");
+            requiredText.classList.add("text");
+            documentationExample.classList.add("col");
+            exampleText.classList.add("text");
+            documentationResponse.classList.add("col");
+            responseText.classList.add("text");
+
             if (data[i].method === "GET") {
               badge = "badge-success";
             } else if (data[i].method === "POST") {
@@ -66,6 +83,16 @@ const pokemonRepository = (() => {
             nameText.classList.add("nameText");
             nameText.innerText = data[i].name;
 
+            documentationRequired.innerText = "Required";
+            requiredText.innerText = data[i].required;
+            documentationExample.innerText = "Example";
+            exampleText.innerText = data[i].example;
+            documentationResponse.innerText = "Response";
+
+            data[i].status.code;
+
+
+
             containerSub2.classList.add("hide");
             containerSub2.classList.add("collapse");
             containerSub2.setAttribute("id", "Search-body" + i);
@@ -76,7 +103,17 @@ const pokemonRepository = (() => {
             cardContainer.classList.add("card-body");
             descriptionContainer.innerText = data[i].description;
 
+            documentationContainer.appendChild(documentationRow);
+            documentationRow.appendChild(documentationRequired);
+            documentationRequired.appendChild(requiredText);
+            documentationRow.appendChild(documentationExample);
+            documentationExample.appendChild(exampleText);
+            documentationRow.appendChild(documentationResponse);
+            documentationResponse.appendChild(responseText);
             cardContainer.appendChild(descriptionContainer);
+
+            cardContainer.appendChild(documentationContainer);
+
             containerSub2.appendChild(cardContainer);
             
 
