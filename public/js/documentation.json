@@ -6,9 +6,10 @@
       "query": "/",
       "description": "Welcome page!",
       "required": "nothing",
-      "usedArray": ["movies"],
+      "usedCollections": ["movies"],
       "example": "http://localhost:8080/",
-      "status": [{ "code": "200", "response": "" }]
+      "status": [{ "code": "200", "response": "json" }],
+      "json": "{ <br> &nbsp; Title: { type: String, required: true },<br> &nbsp; Description: { type: String, required: true },<br> &nbsp; Genre: {<br> &ensp; Name: String,<br> &ensp; Description: String,<br> &nbsp; },<br> &nbsp; Director: {<br> &nbsp; Name: String,<br> &nbsp; Bio: String,<br> &nbsp; BirthYear: Number,<br> &nbsp; DeathYear: Number<br> &nbsp; },<br> &nbsp; Actors: [String],<br> &nbsp; ReleaseDate: Date,<br> &nbsp; ImageUrl: String,<br> &nbsp; Featured: Boolean,<br>}"
     },
     {
       "name": "Get ALL Movies",
@@ -16,12 +17,14 @@
       "query": "/movies",
       "description": "Lists all the movies in the databes",
       "required": "nothing",
-      "usedArray": "movies",
+      "usedCollections": ["movies"],
       "example": "http://localhost:8080/movies",
       "status": [
         { "code": "201", "response": "json" },
         { "code": "500", "response": "Internal Server Error" }
-      ]
+      ],
+      "json": "{ <br> &nbsp; Title: { type: String, required: true },<br> &nbsp; Description: { type: String, required: true },<br> &nbsp; Genre: {<br> &ensp; Name: String,<br> &ensp; Description: String,<br> &nbsp; },<br> &nbsp; Director: {<br> &nbsp; Name: String,<br> &nbsp; Bio: String,<br> &nbsp; BirthYear: Number,<br> &nbsp; DeathYear: Number<br> &nbsp; },<br> &nbsp; Actors: [String],<br> &nbsp; ReleaseDate: Date,<br> &nbsp; ImageUrl: String,<br> &nbsp; Featured: Boolean,<br>}"
+
     },
     {
       "name": "Get Movies by title",
@@ -29,11 +32,13 @@
       "query": "/movies/:title",
       "description": "You can see all the movies in the database",
       "required": "Title of the movie. e.g. Inception",
-      "usedArray": "movies",
+      "usedCollections": ["movies"],
       "example": "http://localhost:8080/movies/Inception",
       "status": [
         { "code": "400", "response": "Can't find a movie with that Title!" }
-      ]
+      ],
+      "json": "{ <br> &nbsp; Title: { type: String, required: true },<br> &nbsp; Description: { type: String, required: true },<br> &nbsp; Genre: {<br> &ensp; Name: String,<br> &ensp; Description: String,<br> &nbsp; },<br> &nbsp; Director: {<br> &nbsp; Name: String,<br> &nbsp; Bio: String,<br> &nbsp; BirthYear: Number,<br> &nbsp; DeathYear: Number<br> &nbsp; },<br> &nbsp; Actors: [String],<br> &nbsp; ReleaseDate: Date,<br> &nbsp; ImageUrl: String,<br> &nbsp; Featured: Boolean,<br>}"
+
     },
     {
       "name": "Filter Movies with a specific Genre",
@@ -41,12 +46,14 @@
       "query": "/movies/genre/:genre",
       "description": "Lists all the movies according to the given genre",
       "required": "a valid Genre. e.g. Action",
-      "usedArray": ["movies"],
+      "usedCollections": ["movies"],
       "example": "http://localhost:8080/movies/genre/Action",
       "status": [
         { "code": "201", "response": "json" },
         { "code": "400", "response": "Can't find a movie with that genre!" }
-      ]
+      ],
+      "json": "{ <br> &nbsp; Title: { type: String, required: true },<br> &nbsp; Description: { type: String, required: true },<br> &nbsp; Genre: {<br> &ensp; Name: String,<br> &ensp; Description: String,<br> &nbsp; },<br> &nbsp; Director: {<br> &nbsp; Name: String,<br> &nbsp; Bio: String,<br> &nbsp; BirthYear: Number,<br> &nbsp; DeathYear: Number<br> &nbsp; },<br> &nbsp; Actors: [String],<br> &nbsp; ReleaseDate: Date,<br> &nbsp; ImageUrl: String,<br> &nbsp; Featured: Boolean,<br>}"
+
     },
     {
       "name": "Filter Movies with Director",
@@ -54,12 +61,14 @@
       "query": "/movies/directors/:directorname",
       "description": "You can filter the movies which are directed ny the looked up director",
       "required": "a valid name of a Director. e.g. Christopher Nolan",
-      "usedArray": ["movies"],
+      "usedCollections": ["movies"],
       "example": "http://localhost:8080/movies/directors/Christopher%20Nolan",
       "status": [
         { "code": "200", "response": "json" },
         { "code": "400", "response": "Can't find a director with that name!" }
-      ]
+      ],
+      "json": "{ <br> &nbsp; Title: { type: String, required: true },<br> &nbsp; Description: { type: String, required: true },<br> &nbsp; Genre: {<br> &ensp; Name: String,<br> &ensp; Description: String,<br> &nbsp; },<br> &nbsp; Director: {<br> &nbsp; Name: String,<br> &nbsp; Bio: String,<br> &nbsp; BirthYear: Number,<br> &nbsp; DeathYear: Number<br> &nbsp; },<br> &nbsp; Actors: [String],<br> &nbsp; ReleaseDate: Date,<br> &nbsp; ImageUrl: String,<br> &nbsp; Featured: Boolean,<br>}"
+
     },
     {
       "name": "Director info by name",
@@ -67,12 +76,14 @@
       "query": "/movies/directors/info/:director name",
       "description": "Fetches the personal information about the director",
       "required": "a valid name of a Director. e.g. Christopher Nolan",
-      "usedArray": ["movies"],
+      "usedCollections": ["movies"],
       "example": "http://localhost:8080/movies/directors/info/Christopher%20Nolan",
       "status": [
         { "code": "200", "response": "json" },
         { "code": "400", "response": "Can't find a director with that name!" }
-      ]
+      ],
+      "json": "{<br> &nbsp; Name: String,<br> &nbsp; Bio: String,<br> &nbsp; BirthYear: Number,<br> &nbsp; DeathYear: Number<br>}"
+
     },
     {
       "name": "Image link by title",
@@ -80,12 +91,14 @@
       "query": "/movies/:title/image/",
       "description": "Retrieves the image link of the movie",
       "required": "Title of the movie. e.g. Inception",
-      "usedArray": ["movies"],
+      "usedCollections": ["movies"],
       "example": "http://localhost:8080/movies/Inception/image/",
       "status": [
         { "code": "201", "response": "json" },
         { "code": "400", "response": "Can't find a movie with that title!" }
-      ]
+      ],
+      "json": "{<br> &nbsp; ImageUrl: String<br>}"
+
     },
     {
       "name": "List all users",
@@ -93,12 +106,14 @@
       "query": "/users/all",
       "description": "Returns the list of users at the databank",
       "required": "Title of the movie. e.g. Inception",
-      "usedArray": ["users"],
+      "usedCollections": ["users"],
       "example": "http://localhost:8080/users/all",
       "status": [
         { "code": "201", "response": "json of all users" },
         { "code": "500", "response": "Internal Server Error" }
-      ]
+      ],
+      "json": "{<br> &nbsp; Username: { type: String, required: true }, <br> &nbsp; Password: { type: String, required: true }, <br> &nbsp; Email: { type: String, required: true }, <br> &nbsp; Birthday: Date, <br> &nbsp; FavoriteMovies: [{ String }]<br>}"
+
     },
     {
       "name": "User by Username",
@@ -106,11 +121,13 @@
       "query": "/users/:Username",
       "description": "Returns the user from the given Username from the databank",
       "required": "Username of a user. e.g. Test",
-      "usedArray": ["users"],
+      "usedCollections": ["users"],
       "example": "http://localhost:8080/users/Test",
       "status": [
         { "code": "500", "response": "Internal Server Error" }
-      ]
+      ],
+      "json": "{<br> &nbsp; Username: { type: String, required: true }, <br> &nbsp; Password: { type: String, required: true }, <br> &nbsp; Email: { type: String, required: true }, <br> &nbsp; Birthday: Date, <br> &nbsp; FavoriteMovies: [{ String }]<br>}"
+
     },
     {
       "name": "Add new user",
@@ -118,12 +135,14 @@
       "query": "/users",
       "description": "Adds a new user with a new UUID (v4) to the databank",
       "required": "nothing",
-      "usedArray": ["users"],
+      "usedCollections": ["users"],
       "example": "http://localhost:8080/users",
       "status": [
         { "code": "201", "response": "req.body.Username + \" already exists\"" },
         { "code": "500", "response": "Internal Server Error" }
-      ]
+      ],
+      "json": "{<br> &nbsp; Username: { type: String, required: true }, <br> &nbsp; Password: { type: String, required: true }, <br> &nbsp; Email: { type: String, required: true }, <br> &nbsp; Birthday: Date, <br> &nbsp; FavoriteMovies: [{ String }]<br>}"
+
     },
     {
       "name": "Update new user",
@@ -131,11 +150,13 @@
       "query": "/users/:Username",
       "description": "Updates the user with the given Username",
       "required": "Username of a user. e.g. Test",
-      "usedArray": ["users"],
+      "usedCollections": ["users"],
       "example": "http://localhost:8080/users/Test",
       "status": [
         { "code": "500", "response": "Internal Server Error" }
-      ]
+      ],
+      "json": "not JSON"
+
     },
     {
       "name": "Delete an existing user",
@@ -143,11 +164,14 @@
       "query": "/users/:Username",
       "description": "Delete an existing user with the given Username",
       "required": "Username of a user. e.g. Test",
-      "usedArray": ["users"],
+      "usedCollections": ["users"],
       "example": "http://localhost:8080/users/Test",
       "status": [
         { "code": "500", "response": "Internal Server Error" }
-      ]
+      ],
+      "json": "not JSON"
+
+      
     },
     {
       "name": "Add FavMovie to user",
@@ -155,13 +179,15 @@
       "query": "/users/:Username/:movieTitle",
       "description": "Add a movie from the given movie title to the users favorite movies list with the given Username",
       "required": "Username and a movie title. e.g. Test/Inception",
-      "usedArray": ["movies", "users"],
+      "usedCollections": ["movies", "users"],
       "example": "http://localhost:8080/users/Test/Inception",
       "status": [
         { "code": "200", "response": "req.params.Username + ' was deleted.'" },
         { "code": "400", "response": "req.params.Username + ' was not found'" },
         { "code": "500", "response": "Internal Server Error" }
-      ]
+      ],
+      "json": "not JSON"
+
     },
     {
       "name": "Delete FavMovie from user",
@@ -169,11 +195,12 @@
       "query": "/users/:Username/:movieTitle",
       "description": "Delete the movie from the users favorite movie list from the given movie title with the given Username",
       "required": "Username and a movie title. e.g. Test/Inception",
-      "usedArray": ["users"],
+      "usedCollections": ["users"],
       "example": "http://localhost:8080/users/1/Inception",
       "status": [
         { "code": "500", "response": "Internal Server Error" }
-      ]
+      ],
+      "json": "not JSON"
     }
   ]
 

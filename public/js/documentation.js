@@ -30,6 +30,11 @@ const pokemonRepository = (() => {
             exampleText = document.createElement("div"),
             documentationResponse = document.createElement("div"),
             responseText = document.createElement("div"),
+            documentationCollections = document.createElement("div"),
+            collectionsText = document.createElement("div"),
+            documentationJsonContainer = document.createElement("div"),
+            documentationJson = document.createElement("div"),
+            jsonText = document.createElement("div"),
             badge = "";
 
             container.classList.add("accordion-item");
@@ -59,13 +64,20 @@ const pokemonRepository = (() => {
 
             documentationContainer.classList.add("container");
             documentationRow.classList.add("row");
+            documentationJsonContainer.classList.add("row");
             documentationRequired.classList.add("col");
             requiredText.classList.add("text");
             documentationExample.classList.add("col");
             exampleText.classList.add("text");
             documentationResponse.classList.add("col");
+            documentationResponse.classList.add("col-4");
             responseText.classList.add("text");
+            documentationCollections.classList.add("col");
+            collectionsText.classList.add("text");
+            documentationJson.classList.add("col");
+            jsonText.classList.add("text");
 
+            
             if (data[i].method === "GET") {
               badge = "badge-success";
             } else if (data[i].method === "POST") {
@@ -88,10 +100,22 @@ const pokemonRepository = (() => {
             documentationExample.innerText = "Example";
             exampleText.innerText = data[i].example;
             documentationResponse.innerText = "Response";
+            documentationCollections.innerText = "Used Collections";
+            documentationJson.innerText = "JSON";
 
-            data[i].status.code;
+            let responseList = "";
+            data[i].status.forEach(element => {
+              responseList = responseList + element.code + ' : ' + element.response + '\n';
+              responseText.innerText = responseList;
+            });
 
+            let collectionsList = "";
+            data[i].usedCollections.forEach(element => {
+              collectionsList = collectionsList + element + '\n';
+              collectionsText.innerText = collectionsList;
+            });
 
+            jsonText.innerHTML =  data[i].json;
 
             containerSub2.classList.add("hide");
             containerSub2.classList.add("collapse");
@@ -104,12 +128,19 @@ const pokemonRepository = (() => {
             descriptionContainer.innerText = data[i].description;
 
             documentationContainer.appendChild(documentationRow);
+            documentationContainer.appendChild(documentationJsonContainer);
             documentationRow.appendChild(documentationRequired);
             documentationRequired.appendChild(requiredText);
             documentationRow.appendChild(documentationExample);
             documentationExample.appendChild(exampleText);
             documentationRow.appendChild(documentationResponse);
             documentationResponse.appendChild(responseText);
+            documentationRow.appendChild(documentationCollections);
+            documentationCollections.appendChild(collectionsText);
+
+            documentationJsonContainer.appendChild(documentationJson);
+            documentationJson.appendChild(jsonText);
+
             cardContainer.appendChild(descriptionContainer);
 
             cardContainer.appendChild(documentationContainer);
