@@ -13,14 +13,14 @@ const express = require("express"),
   app.listen(port, '0.0.0.0',() => {
     console.log('Listening on Port ' + port);
    });
-   
+
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Allowed Domains are defined here
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
+let allowedOrigins = ["mongodb+srv://cOsMiCTr:clio2000@betamax-cluster.p6qd1.mongodb.net/BetamaxDB?retryWrites=true&w=majority"];
 
 app.use(
   cors({
