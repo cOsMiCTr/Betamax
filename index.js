@@ -9,8 +9,11 @@ const express = require("express"),
   uuid = require("uuid"),
   cors = require("cors"),
   { check, validationResult } = require("express-validator"),
-  port = 8080; //process.env.PORT || 8080;
-
+  port = process.env.PORT || 8080;
+  app.listen(port, '0.0.0.0',() => {
+    console.log('Listening on Port ' + port);
+   });
+   
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(bodyParser.json());
@@ -385,6 +388,4 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(port, '0.0.0.0',() => {
- console.log('Listening on Port ' + port);
-});
+
