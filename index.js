@@ -47,7 +47,7 @@ mongoose.connect("mongodb://localhost:27017/Betamax", {
 // //---------- ENDPOINTS ----------
 
 app.get("/", (req, res) => {
-  res.status(200).send("Welcome to my Movie app!");
+  res.status(200).send("Welcome to mdddy Movie app!");
 });
 
 // API Documentation
