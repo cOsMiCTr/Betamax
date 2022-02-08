@@ -9,7 +9,7 @@ const express = require("express"),
   uuid = require("uuid"),
   cors = require("cors"),
   { check, validationResult } = require("express-validator"),
-  port = process.env.PORT || 8080;
+  port = 8080; //process.env.PORT || 8080;
 
 app.use(morgan("common"));
 app.use(express.static("public"));
