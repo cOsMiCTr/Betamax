@@ -13,14 +13,14 @@ const express = require("express"),
   app.listen(port, '0.0.0.0',() => {
     console.log('Listening on Port ' + port);
    });
-
+   
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Allowed Domains are defined here
-let allowedOrigins = ["mongodb+srv://cOsMiCTr:clio2000@betamax-cluster.p6qd1.mongodb.net/BetamaxDB?retryWrites=true&w=majority"];
+let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
 
 app.use(
   cors({
@@ -42,7 +42,7 @@ let auth = require("./auth")(app);
 const passport = require("passport");
 require("./passport");
 
-mongoose.connect("mongodb://localhost:27017/Betamax", {
+mongoose.connect("mongodb+srv://cOsMiCTr:clio2000@betamax-cluster.p6qd1.mongodb.net/BetamaxDB?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
